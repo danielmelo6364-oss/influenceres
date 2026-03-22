@@ -7,10 +7,78 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { text-align: center; color: #333; margin-bottom: 30px; font-size: 26px; }
+        .container { max-width: 1300px; margin: 0 auto; }
 
-        .add-influencer { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; font-size: 24px; }
+
+        /* UNIDADES */
+        .unidades-wrapper {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .unidades-titulo {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .unidades-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .btn-unidade {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-unidade:hover { background: #f0f2ff; }
+        .btn-unidade.ativo {
+            background: #667eea;
+            color: white;
+        }
+
+        /* HEADER DA UNIDADE ATIVA */
+        .unidade-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .unidade-header h2 {
+            font-size: 20px;
+            color: #667eea;
+        }
+        .unidade-header p {
+            font-size: 13px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* RESUMO */
+        .resumo {
+            display: flex; gap: 16px; justify-content: center;
+            margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .resumo-card {
+            background: white; border-radius: 8px;
+            padding: 12px 20px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            min-width: 130px;
+        }
+        .resumo-card .numero { font-size: 26px; font-weight: bold; color: #667eea; }
+        .resumo-card .label { font-size: 11px; color: #999; margin-top: 4px; }
+
+        /* ADD INFLUENCER */
+        .add-influencer { display: flex; gap: 10px; margin-bottom: 24px; justify-content: center; }
         .add-influencer input {
             padding: 10px 16px; border: 2px solid #667eea; border-radius: 6px;
             font-size: 14px; width: 280px; outline: none;
@@ -21,23 +89,24 @@
         }
         .add-influencer button:hover { background: #5568d3; }
 
+        /* TABELA */
         .tabela-wrapper { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         thead { background: #667eea; color: white; }
-        thead th { padding: 14px 10px; font-size: 13px; text-align: center; }
-        thead th:first-child { text-align: left; padding-left: 20px; min-width: 180px; }
+        thead th { padding: 12px 8px; font-size: 12px; text-align: center; }
+        thead th:first-child { text-align: left; padding-left: 18px; min-width: 160px; }
         tbody tr { border-bottom: 1px solid #eee; }
         tbody tr:hover { background: #f9f9ff; }
-        tbody td { padding: 10px; text-align: center; vertical-align: middle; }
-        tbody td:first-child { text-align: left; padding-left: 20px; font-weight: bold; color: #333; }
+        tbody td { padding: 8px; text-align: center; vertical-align: middle; }
+        tbody td:first-child { text-align: left; padding-left: 18px; font-weight: bold; color: #333; font-size: 13px; }
 
-        .cell-wrapper { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .cell-wrapper { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 
         select {
-            padding: 6px 8px;
+            padding: 5px 6px;
             border: 2px solid #ddd;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             outline: none;
             width: 120px;
@@ -47,7 +116,7 @@
         select.pendente { border-color: #ddd; background: white; color: #666; }
 
         .link-input {
-            padding: 6px 8px;
+            padding: 5px 6px;
             border: 2px solid #667eea;
             border-radius: 6px;
             font-size: 11px;
@@ -57,52 +126,54 @@
 
         .ver-link {
             display: inline-block;
-            padding: 4px 10px;
+            padding: 4px 8px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 4px;
             font-size: 11px;
             font-weight: bold;
+            width: 108px;
+            text-align: center;
         }
         .ver-link:hover { background: #5568d3; }
 
         .remover-btn {
-            background: none;
-            border: none;
-            color: #f44336;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 4px 8px;
-            border-radius: 4px;
+            background: none; border: none; color: #f44336;
+            cursor: pointer; font-size: 15px; padding: 4px 8px; border-radius: 4px;
         }
         .remover-btn:hover { background: #ffebee; }
 
-        .resumo {
-            display: flex; gap: 20px; justify-content: center;
-            margin-bottom: 24px; flex-wrap: wrap;
-        }
-        .resumo-card {
-            background: white; border-radius: 8px;
-            padding: 14px 24px; text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            min-width: 140px;
-        }
-        .resumo-card .numero { font-size: 28px; font-weight: bold; color: #667eea; }
-        .resumo-card .label { font-size: 12px; color: #999; margin-top: 4px; }
-
         .salvo-msg {
             text-align: center; color: #4caf50;
-            font-size: 13px; margin-top: 16px;
+            font-size: 13px; margin-top: 14px;
             opacity: 0; transition: opacity 0.5s;
         }
         .salvo-msg.visivel { opacity: 1; }
+
+        .vazio-msg {
+            text-align: center; color: #bbb;
+            padding: 40px; font-size: 14px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>📲 Controle de Entrega — Influencers</h1>
+    <h1>📲 Controle de Influencers por Unidade</h1>
 
+    <!-- BOTÕES DE UNIDADE -->
+    <div class="unidades-wrapper">
+        <div class="unidades-titulo">Selecione a unidade</div>
+        <div class="unidades-grid" id="unidades-grid"></div>
+    </div>
+
+    <!-- HEADER DA UNIDADE ATIVA -->
+    <div class="unidade-header">
+        <h2 id="unidade-nome-titulo"></h2>
+        <p id="unidade-subtitulo"></p>
+    </div>
+
+    <!-- RESUMO -->
     <div class="resumo">
         <div class="resumo-card">
             <div class="numero" id="total-influencers">0</div>
@@ -118,15 +189,17 @@
         </div>
     </div>
 
+    <!-- ADD INFLUENCER -->
     <div class="add-influencer">
         <input type="text" id="novo-nome" placeholder="Nome do influencer..." />
         <button onclick="adicionarInfluencer()">+ Adicionar</button>
     </div>
 
+    <!-- TABELA -->
     <div class="tabela-wrapper">
         <table id="tabela">
             <thead>
-                <tr id="cabecalho">
+                <tr>
                     <th>Influencer</th>
                     <th>Jan</th><th>Fev</th><th>Mar</th><th>Abr</th>
                     <th>Mai</th><th>Jun</th><th>Jul</th><th>Ago</th>
@@ -142,14 +215,57 @@
 </div>
 
 <script>
-    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    let influencers = JSON.parse(localStorage.getItem('influencers')) || [];
+    const unidades = [
+        'Salesianos', 'Aeroporto', 'Tiradentes', 'Parque Ecológico',
+        'Premium', 'Lagoa Seca', 'São José', 'Barbalha',
+        'AABB', 'São Luiz', 'Matriz', 'Avenida', 'Tianguá'
+    ];
 
-    function salvar() {
-        localStorage.setItem('influencers', JSON.stringify(influencers));
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+
+    let unidadeAtiva = unidades[0];
+
+    function chaveStorage(unidade) {
+        return 'influencers_' + unidade.replace(/\s/g, '_').toLowerCase();
+    }
+
+    function carregarDados(unidade) {
+        return JSON.parse(localStorage.getItem(chaveStorage(unidade))) || [];
+    }
+
+    function salvarDados(unidade, dados) {
+        localStorage.setItem(chaveStorage(unidade), JSON.stringify(dados));
         const msg = document.getElementById('salvo-msg');
         msg.classList.add('visivel');
         setTimeout(() => msg.classList.remove('visivel'), 2500);
+    }
+
+    function renderizarBotoes() {
+        const grid = document.getElementById('unidades-grid');
+        grid.innerHTML = '';
+        unidades.forEach(u => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-unidade' + (u === unidadeAtiva ? ' ativo' : '');
+            btn.textContent = u;
+            btn.onclick = () => selecionarUnidade(u);
+            grid.appendChild(btn);
+        });
+    }
+
+    function selecionarUnidade(unidade) {
+        unidadeAtiva = unidade;
+        renderizarBotoes();
+        atualizarHeaderUnidade();
+        renderizar();
+    }
+
+    function atualizarHeaderUnidade() {
+        const dados = carregarDados(unidadeAtiva);
+        document.getElementById('unidade-nome-titulo').textContent = '📍 Unidade ' + unidadeAtiva;
+        document.getElementById('unidade-subtitulo').textContent =
+            dados.length === 0
+                ? 'Nenhum influencer cadastrado ainda'
+                : dados.length + ' influencer(s) cadastrado(s)';
     }
 
     function adicionarInfluencer() {
@@ -157,46 +273,63 @@
         const nome = input.value.trim();
         if (!nome) return;
 
+        const dados = carregarDados(unidadeAtiva);
         const novo = { id: Date.now(), nome, meses: {} };
         meses.forEach(m => novo.meses[m] = { status: 'pendente', link: '' });
 
-        influencers.push(novo);
+        dados.push(novo);
         input.value = '';
-        salvar();
+        salvarDados(unidadeAtiva, dados);
+        atualizarHeaderUnidade();
         renderizar();
     }
 
     function removerInfluencer(id) {
         if (!confirm('Remover este influencer?')) return;
-        influencers = influencers.filter(i => i.id !== id);
-        salvar();
+        let dados = carregarDados(unidadeAtiva);
+        dados = dados.filter(i => i.id !== id);
+        salvarDados(unidadeAtiva, dados);
+        atualizarHeaderUnidade();
         renderizar();
     }
 
     function atualizarStatus(id, mes, valor) {
-        const inf = influencers.find(i => i.id === id);
+        const dados = carregarDados(unidadeAtiva);
+        const inf = dados.find(i => i.id === id);
         if (!inf) return;
         inf.meses[mes].status = valor;
         if (valor !== 'entregue') inf.meses[mes].link = '';
-        salvar();
+        salvarDados(unidadeAtiva, dados);
         renderizar();
     }
 
     function atualizarLink(id, mes, valor) {
-        const inf = influencers.find(i => i.id === id);
+        const dados = carregarDados(unidadeAtiva);
+        const inf = dados.find(i => i.id === id);
         if (!inf) return;
         inf.meses[mes].link = valor;
-        salvar();
+        salvarDados(unidadeAtiva, dados);
     }
 
     function renderizar() {
         const tbody = document.getElementById('corpo-tabela');
         tbody.innerHTML = '';
 
+        const dados = carregarDados(unidadeAtiva);
         let totalEntregues = 0;
         let totalPendentes = 0;
 
-        influencers.forEach(inf => {
+        if (dados.length === 0) {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.colSpan = 15;
+            td.className = 'vazio-msg';
+            td.textContent = 'Nenhum influencer cadastrado para esta unidade. Adicione o primeiro acima!';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
+
+        dados.forEach(inf => {
             const tr = document.createElement('tr');
 
             const tdNome = document.createElement('td');
@@ -204,26 +337,26 @@
             tr.appendChild(tdNome);
 
             meses.forEach(mes => {
-                const dados = inf.meses[mes];
+                const dado = inf.meses[mes];
                 const td = document.createElement('td');
                 const wrapper = document.createElement('div');
                 wrapper.className = 'cell-wrapper';
 
                 const select = document.createElement('select');
-                select.className = dados.status === 'entregue' ? 'entregue' : dados.status === 'nao-entregue' ? 'nao-entregue' : 'pendente';
+                select.className = dado.status === 'entregue' ? 'entregue' : dado.status === 'nao-entregue' ? 'nao-entregue' : 'pendente';
                 select.innerHTML = `
-                    <option value="pendente" ${dados.status === 'pendente' ? 'selected' : ''}>⏳ Pendente</option>
-                    <option value="entregue" ${dados.status === 'entregue' ? 'selected' : ''}>✅ Entregue</option>
-                    <option value="nao-entregue" ${dados.status === 'nao-entregue' ? 'selected' : ''}>❌ Não entregue</option>
+                    <option value="pendente" ${dado.status === 'pendente' ? 'selected' : ''}>⏳ Pendente</option>
+                    <option value="entregue" ${dado.status === 'entregue' ? 'selected' : ''}>✅ Entregue</option>
+                    <option value="nao-entregue" ${dado.status === 'nao-entregue' ? 'selected' : ''}>❌ Não entregue</option>
                 `;
                 select.addEventListener('change', (e) => atualizarStatus(inf.id, mes, e.target.value));
                 wrapper.appendChild(select);
 
-                if (dados.status === 'entregue') {
+                if (dado.status === 'entregue') {
                     totalEntregues++;
-                    if (dados.link) {
+                    if (dado.link) {
                         const link = document.createElement('a');
-                        link.href = dados.link;
+                        link.href = dado.link;
                         link.target = '_blank';
                         link.className = 'ver-link';
                         link.textContent = '▶ Ver vídeo';
@@ -233,14 +366,14 @@
                         input.type = 'url';
                         input.className = 'link-input';
                         input.placeholder = 'Cole o link aqui...';
-                        input.value = dados.link;
+                        input.value = dado.link;
                         input.addEventListener('change', (e) => {
                             atualizarLink(inf.id, mes, e.target.value);
                             renderizar();
                         });
                         wrapper.appendChild(input);
                     }
-                } else if (dados.status === 'pendente') {
+                } else if (dado.status === 'pendente') {
                     totalPendentes++;
                 }
 
@@ -260,7 +393,7 @@
             tbody.appendChild(tr);
         });
 
-        document.getElementById('total-influencers').textContent = influencers.length;
+        document.getElementById('total-influencers').textContent = dados.length;
         document.getElementById('total-entregues').textContent = totalEntregues;
         document.getElementById('total-pendentes').textContent = totalPendentes;
     }
@@ -269,6 +402,9 @@
         if (e.key === 'Enter') adicionarInfluencer();
     });
 
+    // INICIALIZAR
+    renderizarBotoes();
+    atualizarHeaderUnidade();
     renderizar();
 </script>
 </body>
